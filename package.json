@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MuftiH/golden-hour-calculator#readme",
   "dependencies": {
+    "balanced-match": "^1.0.0",
     "suncalc": "^1.8.0"
   },
   "devDependencies": {
