@@ -1,5 +1,5 @@
 import SunCalc from "suncalc";
-
+import "./index.css";
 //window.onload = goldenTimes.startingTime();
 
 // const goldenTimes = {
