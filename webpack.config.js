@@ -1,14 +1,18 @@
-const path = require('path');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: [
-    './src/index.js',
-    './src/index.css'
-  ],
+  entry: ["./src/index.js", "./src/index.css"],
   output: {
     path: __dirname,
-    publicPath: '/',
-    filename: 'bundle.js'
+    publicPath: "/",
+    filename: "bundle.js"
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "."),
+    watchContentBase: true,
+    hot: true
   },
   module: {
     rules: [
@@ -23,7 +27,10 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: "style-loader",
+            options: {
+              singleton: true
+            }
           },
           {
             loader: "css-loader",
@@ -38,5 +45,13 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "index.html"
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
