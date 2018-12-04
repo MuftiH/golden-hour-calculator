@@ -6,7 +6,7 @@ module.exports = {
   entry: ["./src/index.js", "./src/index.css"],
   output: {
     path: __dirname,
-    publicPath: "/",
+    publicPath: "./",
     filename: "bundle.js"
   },
   devServer: {
