@@ -5,13 +5,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: ["./src/index.js", "./src/index.css"],
   output: {
-    path: __dirname,
-    publicPath: "./",
-    filename: "bundle.js"
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "."),
+    publicPath: "/"
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "."),
+    contentBase: path.resolve(__dirname, "./"),
     watchContentBase: true,
+    publicPath: "./",
     hot: true
   },
   module: {

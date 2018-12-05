@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "1faf8796b349511f2a21";
+/******/ 	var hotCurrentHash = "b2751d817a0cd4194a13";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -782,7 +782,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "./";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
@@ -868,7 +868,7 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader??ref--
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ \"./node_modules/suncalc/suncalc.js\");\n/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.css */ \"./src/index.css\");\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_1__);\n\n //window.onload = goldenTimes.startingTime();\n// const goldenTimes = {\n//   startingTime: () => {\n//     let times = SunCalc.getTimes(new Date(), 47.6, 122.3);\n//     let goldenHourStr =\n//       times.goldenHour.getHours() + \":\" + times.goldenHour.getMinutes();\n//   }\n// };\n\nfunction startGold(latitude, longitude) {\n  var newElement = document.createElement(\"h1\");\n  var today = new Date();\n  console.log(suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(today, 47.6062, 122.3321));\n  console.log(suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.times.goldenHourEnd, suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.times.goldenHour); // let goldenHourString = document.createTextNode(times);\n  // newElement.appendChild(goldenHourString);\n  // document.body.appendChild(newElement);\n}\n\nstartGold(47.6062, 122.3321); //sunriseEnd --> goldenHourEnd  for morning, convert from 24 hour gmt to 12 hour pst\n//goldenHour --> sunsetStart for evening, convert from 24 hour gmt to 12 hour pst\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ \"./node_modules/suncalc/suncalc.js\");\n/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);\n //import \"./index.css\";\n//window.onload = goldenTimes.startingTime();\n// const goldenTimes = {\n//   startingTime: () => {\n//     let times = SunCalc.getTimes(new Date(), 47.6, 122.3);\n//     let goldenHourStr =\n//       times.goldenHour.getHours() + \":\" + times.goldenHour.getMinutes();\n//   }\n// };\n// function startGold(latitude, longitude) {\n//   let newElement = document.createElement(\"h1\");\n//   let today = new Date();\n//   console.log(SunCalc.getTimes(today, 47.6062, 122.3321));\n//   console.log(SunCalc.times.goldenHourEnd, SunCalc.times.goldenHour);\n//   let goldenHourString = document.createTextNode(times);\n//   newElement.appendChild(goldenHourString);\n//   document.body.appendChild(newElement);\n// }\n// startGold(47.6062, 122.3321);\n//sunriseEnd --> goldenHourEnd  for morning, convert from 24 hour gmt to 12 hour pst\n//goldenHour --> sunsetStart for evening, convert from 24 hour gmt to 12 hour pst\n\nconsole.log(\"haaaaa\");\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
