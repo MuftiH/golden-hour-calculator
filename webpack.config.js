@@ -10,9 +10,9 @@ module.exports = {
     publicPath: "/"
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "./"),
+    contentBase: path.resolve(__dirname, "."),
     watchContentBase: true,
-    publicPath: "./",
+    publicPath: "/",
     hot: true
   },
   module: {
@@ -47,7 +47,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "index.html"
+      template: "index.html",
+      inject: false
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
