@@ -1,5 +1,5 @@
 import SunCalc from "suncalc";
-import css from "./index.css";
+import "./index.css";
 
 //declare function which creates a promise using geolocation API
 const getPosition = options => {
