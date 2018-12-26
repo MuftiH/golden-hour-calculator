@@ -1,5 +1,5 @@
 import SunCalc from "suncalc";
-import "./index.css";
+import "./style.css";
 
 //declare function which creates a promise using geolocation API
 const getPosition = options => {
@@ -111,3 +111,5 @@ const displayTimesNight = text => {
   element.appendChild(elementText);
   parent.appendChild(element);
 };
+
+console.log("hi");

@@ -1,19 +1,18 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+//const nodeExternals = require("webpack-node-externals");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
-  entry: ["./src/index.js", "./src/index.css"],
+  entry: { main: "./src/index.js" },
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "."),
-    publicPath: "/"
+    filename: "main.js"
   },
+  target: "web",
   devServer: {
-    contentBase: path.resolve(__dirname, "."),
-    watchContentBase: true,
-    publicPath: "/",
-    hot: true
+    hot: true,
+    open: true
   },
   module: {
     rules: [
@@ -26,17 +25,19 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
   plugins: [
+    new CleanWebpackPlugin("dist"),
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "index.html",
-      inject: false
+      template: "./src/index.html"
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "style.css"
+    })
   ]
 };
