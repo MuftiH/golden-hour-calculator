@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -14,15 +15,26 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300"
+      rel="stylesheet"
+    />
 
-    <title>yo when golden hour at</title>
+    <title>Golden Times</title>
   </head>
   <body>
-    <div><h1>these are the times for golden hour</h1></div>
-    <h2>still a wip</h2>
-    <script
-      type="text/javascript"
-      src="../golden-hour-calculator/bundle.js"
-    ></script>
+    <h1>When is golden hour?</h1>
+    <div class="card w-100 personal-card">
+      <div class="container">
+        <div class="morning">
+          <h1>in the <span class="morningColor">morning:</span></h1>
+        </div>
+        <div class="night">
+          <h1>in the <span class="nightColor">evening:</span></h1>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./bundle.js"></script>
   </body>
 </html>

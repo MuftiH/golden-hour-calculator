@@ -1,72 +1,113 @@
 import SunCalc from "suncalc";
-import "./index.css";
-import moment from "moment";
-import "moment-timezone";
-//window.onload = goldenTimes.startingTime();
+import css from "./index.css";
 
-let today = new Date();
-let times = SunCalc.getTimes(today, 47.6062, 122.3321);
+//declare function which creates a promise using geolocation API
+const getPosition = options => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      // On Success
+      position => {
+        //Values that will be resolved by the promise, latitude and
+        // latitude in an object
+        let coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        // return coordinates;
 
-//sunriseEnd --> goldenHourEnd  for morning, convert from 24 hour gmt to 12 hour pst
-//goldenHour --> sunsetStart for evening, convert from 24 hour gmt to 12 hour pst
+        resolve(coordinates);
+      },
 
-let morningStartRaw = String(times.sunriseEnd);
-let morningEndRaw = String(times.goldenHourEnd);
-let eveningStartRaw = String(times.goldenHour);
-let eveningEndRaw = String(times.sunsetStart);
+      // On Error
+      error => {
+        reject(error);
+      },
 
-let morningStart = moment
-  .tz(morningStartRaw, "America/Los_Angeles")
-  .format("h:mm a");
+      options
+    );
+  });
+};
 
-let morningEnd = moment
-  .tz(morningEndRaw, "America/Los_Angeles")
-  .format("h:mm a");
+//Note to self: make sure its not the precise location later
+getPosition({ maximumAge: 5 * 60 * 1000, timeout: 5000 })
+  // Position right here should be an object with latitude
+  //and longitude of the user, the function handles this position
+  .then(position => {
+    const morningTimes = document.querySelector(".morning");
+    const nightTimes = document.querySelector(".night");
 
-let eveningStart = moment
-  .tz(eveningStartRaw, "America/Los_Angeles")
-  .format("h:mm a");
+    let today = new Date();
 
-let eveningEnd = moment
-  .tz(eveningEndRaw, "America/Los_Angeles")
-  .format("h:mm a");
+    //Get SunCalc times from today's date
+    let times = findTimes(today, position.latitude, position.longitude);
 
-console.log(morningStart, 1);
-console.log(morningEnd, 2);
-console.log(eveningStart, 3);
-console.log(eveningEnd, 4);
+    //Object which has raw dates and time for each sun position
+    let timesObject = {
+      sunriseEndData: times.sunriseEnd,
+      goldenHourEndData: times.goldenHourEnd,
+      goldenHourData: times.goldenHour,
+      sunsetStartData: times.sunsetStart
+    };
 
-let myDiv = document.querySelector("div");
+    //Map date object to an array of values
+    const timesObjectArray = Object.keys(timesObject).map(
+      key => timesObject[key]
+    );
 
-function makeStartElement() {
-  let startH = document.createElement("h1");
-  let text = document.createTextNode(morningStart);
-  startH.appendChild(text);
-  myDiv.appendChild(startH);
-}
+    //Format and map each date from
+    //timesObjectArray using formatAMPM function
+    const timesArray = timesObjectArray.map(formatAMPM);
 
-function makeEndElement() {
-  let endH = document.createElement("h1");
-  let text = document.createTextNode(morningEnd);
-  endH.appendChild(text);
-  myDiv.appendChild(endH);
-}
+    //  timesArray.forEach(displayTimes)
 
-function makeEveElement() {
-  let eveH = document.createElement("h1");
-  let text = document.createTextNode(eveningStart);
-  eveH.appendChild(text);
-  myDiv.appendChild(eveH);
-}
+    //Slice array into morning times and night times
+    let morningArray = timesArray.slice(0, 2);
+    let nightArray = timesArray.slice(2, 4);
 
-function makeEveEnd() {
-  let eveEnd = document.createElement("h1");
-  let text = document.createTextNode(eveningEnd);
-  eveEnd.appendChild(text);
-  myDiv.appendChild(eveEnd);
-}
+    //Display morning times
+    morningArray.forEach(displayTimesMorning);
 
-makeStartElement();
-makeEndElement();
-makeEveElement();
-makeEveEnd();
+    //Dispaly night times
+    nightArray.forEach(displayTimesNight);
+  })
+
+  .catch(err => {
+    console.error(err.message);
+  });
+
+// let today = new Date();
+
+//Function that returns SunCalc sunlight times for given parameters
+let findTimes = (date, latitude, longitude) => {
+  return SunCalc.getTimes(date, latitude, longitude);
+};
+
+//Functions which formats time into 12 hour and AM/PM
+const formatAMPM = date => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  let strTime = hours + ":" + minutes + " " + ampm;
+  return strTime;
+};
+
+//Function which creates and displays html element given
+//text and parent element to be displayed under
+const displayTimesMorning = text => {
+  let parent = document.querySelector(".morning");
+  let element = document.createElement("h2");
+  let elementText = document.createTextNode(text);
+  element.appendChild(elementText);
+  parent.appendChild(element);
+};
+
+const displayTimesNight = text => {
+  let parent = document.querySelector(".night");
+  let element = document.createElement("h2");
+  let elementText = document.createTextNode(text);
+  element.appendChild(elementText);
+  parent.appendChild(element);
+};

@@ -22,8 +22,6 @@
   },
   "homepage": "https://github.com/MuftiH/golden-hour-calculator#readme",
   "dependencies": {
-    "moment": "^2.22.2",
-    "moment-timezone": "^0.5.23",
     "script-loader": "^0.7.2",
     "suncalc": "^1.8.0"
   },
